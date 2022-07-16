@@ -35,7 +35,7 @@ private JpaBoardService svc;
 		
 		@GetMapping("")
 		public String board () {
-			
+			System.out.println("버전!!!!");
 			return "jpaBoard";
 		}
 		
