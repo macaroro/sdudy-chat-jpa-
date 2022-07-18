@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+  <table>
+     <tr th:each="emp : ${list}">
+       <td th:text="'번호:'+ ${emp.empno}"></td>
+       <td th:text="'이름:'+${emp.ename}"></td>
+       <td th:text="'부서번호:'+${emp.deptno}"></td>
+       <td th:text="'고용일:'+${emp.hiredate}"></td>
+       <td th:text="'급여:'+${emp.sal}"></td>
+     </tr>
+ 
+ 
+  </table>   
+    
+ </div>
+ 
+</body>
+</html>

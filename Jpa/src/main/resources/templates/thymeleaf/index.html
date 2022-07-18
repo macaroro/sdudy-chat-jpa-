@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>
+Thymeleaf 테스트 하기</h3><br>
+
+<!--  
+Item:<div th:text="${item}">
+<!-- controller에 있는 model에 있는 값 가져오기 --></div><br>
+<!--  
+EMP:<div th:text="'번호:'+ ${emp.empno}"></div>
+    <div th:text="'이름:'+${emp.ename}"></div>
+    <div th:text="'부서번호:'+${emp.deptno}"></div>
+    <div th:text="'고용일:'+${emp.hiredate}"></div>
+    <div th:text="'급여:'+${emp.sal}"></div>
+     -->
+ <div>
+  <table>
+     <tr th:each="emp : ${list}">
+       <td th:text="'번호:'+ ${emp.empno}"></td>
+       <td th:text="'이름:'+${emp.ename}"></td>
+       <td th:text="'부서번호:'+${emp.deptno}"></td>
+       <td th:text="'고용일:'+${emp.hiredate}"></td>
+       <td th:text="'급여:'+${emp.sal}"></td>
+     </tr>
+ 
+ 
+  </table>   
+    
+ </div>
+ 
+ <div th:if="${emp.ename}=='roro'" style="color: red;"><div th:text="${emp.ename}"></div></div>
+ <div th:unless="${emp.ename}=='roro'">who are you?</div>
+ 
+ 
+ <div th:switch="${emp.deptno}">
+ <p th:case="'10'">User is an admin</p>
+  <p th:case="'20'">User is an manager</p>
+   <p th:case="'30'">User is an guest</p>
+    <p th:case="*">User is some other thing</p>
+
+ </div>
+ 
+ <a th:href="@{/th/menu}">목록보기</a>
+</body>
+</html>
