@@ -3,14 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#sal_err{color: red;}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
-<form method="post" th:action="@{/th/save}">
+<form method="post" th:action="@{/th/save}" th:object="${emp}">
 
-<div><label>번호<input type="text" name="empno"></label></div>
-<div><label>이름<input type="text" name="ename"></label></div>
-<div><label>부서번호<input type="text" name="deptno"></label></div>
-<div><label>급여<input type="text" name="sal"></label></div>
+<div><label>번호<input type="text"  th:field="*{empno}"></label></div>
+<div><label>이름<input type="text"  th:field="*{ename}"></label></div>
+<div><label>부서번호<input type="text"  th:field="*{deptno}" ></label></div>
+<div><label>급여<input type="text"  th:field="*{sal}"></label>
+      <span id="sal_err" th:text="${err}"></span>
+      <!-- span은 데이터가 없으면 출력하지 않고 있으면 출력 -->
+</div>
 <div>
 <button type="submit">제출</button>
 <button type="reset">취소</button>

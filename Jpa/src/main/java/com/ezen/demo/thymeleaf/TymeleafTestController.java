@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.demo.emp.Emp;
 
@@ -18,7 +18,6 @@ public class TymeleafTestController {
 	
 	@GetMapping("/index")
 	public String index() {
-		
 		return"thymeleaf/index";
 	}
 	
@@ -97,15 +96,23 @@ public class TymeleafTestController {
 	}
 	
 	@GetMapping("/input")
-	public String input() {
+	public String input(Model model) {
+		
+		model.addAttribute("emp", new Emp());
+		//form-back bean: 폼을 되돌려 줄때 오류가 나지 않기위해 필요
 		return"thymeleaf/inputForm";
 	}
 	
 	@PostMapping("/save")
-	@ResponseBody
-	public Emp save(Emp emp) {
+	public String save(@ModelAttribute Emp emp) {
+		if(emp.getSal()>5000) {
+//			model.addAttribute("emp", emp);
+//			model.addAttribute("err", "5000미만 이어야 한다");
+			return "thymeleaf/inputForm";
+		};
 		
-		return emp;
+		System.out.println(emp);
+		return null;
 	}
 
 }

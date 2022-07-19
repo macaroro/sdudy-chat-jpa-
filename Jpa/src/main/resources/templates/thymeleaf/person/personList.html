@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+  <table>
+     <tr th:each="p : ${list}">
+       <td th:text="'번호:'+ ${p.num}"></td>
+     <td><a th:text="${p.name}" th:href="@{'/person/detail/'+ ${p.num}}"></a></td>
+       <td th:text="'이메일:'+${p.email}"></td>
+       <td th:text="'나이:'+${p.age}"></td>
+       
+     </tr>
+ 
+ 
+  </table>   
+    
+ </div>
+ 
+</body>
+</html>

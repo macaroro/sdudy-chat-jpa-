@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>인물 정보</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+function update()
+{
+
+	var serData = $('#edit_form').serialize();
+	 var data=$("#num").val();
+	$.ajax({
+		url:'/person/update',
+		method:'post',
+		cache:false,
+		data:serData,
+		dataType:'json',
+		success:function(res){
+			alert(res.updated==true? '수정성공':'실패');
+	
+			location.href="/person/detail/"+data;
+		},
+		error:function(xhr,status,err){
+			alert(err);
+		}
+	});
+	return false;
+}
+</script>
+
+</head>
+<body>
+<form id="edit_form" onsubmit="return update();" th:object="${p}">
+
+
+<div><label>이름<input type="text" th:field="*{num}" id="num" readonly></label></div>
+<div><label>이름<input type="text" th:field="*{name}" readonly ></label></div>
+<div><label>이메일<input type="text" th:field="*{email}"  ></label></div>
+<div><label>나이<input type="text"  th:field="*{age}" readonly></label></div>
+
+<div>
+<button type="submit">수정</button>
+<button type="reset">취소</button>
+</div>
+
+</form>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>인물 정보</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+function save()
+{
+	var serData = $('#input_form').serialize();
+	$.ajax({
+		url:'/person/save',
+		method:'post',
+		cache:false,
+		data:serData,
+		dataType:'json',
+		success:function(res){
+			alert(res.saved==true? '저장성공':'실패');
+	
+				location.href="/person/list";
+		},
+		error:function(xhr,status,err){
+			alert(err);
+		}
+	});
+	return false;
+}
+
+
+</script>
+<style type="text/css">
+.err{color: red;}
+</style>
+</head>
+<body>
+<form  id="input_form" th:action="@{/person/save}" th:object="${person}" method="post" >
+
+
+<div><label>이름<input type="text" th:field="*{name}" id="name"></label>
+<div class="err" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+</div>
+
+<div><label>이메일<input type="text" th:field="*{email}" id="email" ></label>
+<div class="err" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+</div>
+
+<div><label>나이<input type="text"  th:field="*{age}" id="age"></label>
+
+<div class="err" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div></div>
+  
+
+
+<div>
+<button type="submit">제출</button>
+<button type="reset">취소</button>
+</div>
+
+</form>
+</body>
+</html>>
