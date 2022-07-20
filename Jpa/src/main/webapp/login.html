@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+var msg = '[[${msg}]]';
+if(msg) alert(msg);
+
+</script>
+</head>
+<body>
+
+<form  id="login_form" th:action="@{/person/access}" method="post">
+아이디:<input type="text" name="id" id="id">
+비밀번호:<input type="text" name="pw" id="pw">
+
+<div>
+<button type="submit">로그인</button>
+<button type="reset">취소</button>
+</div>
+
+</form>
+</body>
+</html>

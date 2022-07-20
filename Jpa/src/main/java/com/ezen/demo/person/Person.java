@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
@@ -24,13 +25,20 @@ public class Person {
 	private int num;//pk의 역할을 지정
 	
 	@NotEmpty(message="필수 입력입니다")
+	@Size(min=2, message="{Person.Name.Size}")
+	//오류메세지를 직접 정의하지 않더라고 메세제 사용가능
+	//message properties에 설정가능
 	private String name;
-	
+	@NotEmpty
+	@Size(min = 5)
 	private String email;
+	
 	private int age;
 	
 	
 	
+	
+
 
 	public int getNum() {
 		return num;
