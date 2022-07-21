@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,7 @@ import org.springframework.web.client.HttpClientErrorException;
 
 @Controller
 @RequestMapping("/person")
+@ServletComponentScan
 public class PersonController {
 	
 	@Autowired
@@ -32,7 +34,7 @@ public class PersonController {
 	@GetMapping("/login")
 	public String login() {
 	
-		return "thymeleaf/login";
+		return "thymeleaf/person/login";
 	}
 	
 	@PostMapping("/access")
@@ -52,12 +54,35 @@ public class PersonController {
 		return "thymeleaf/login";
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session)
+	{
+		session.invalidate();
+		return "redirect:/person/info";
+	}
+	
+//	@PostMapping("/login")
+//	@ResponseBody
+//	public String login(@RequestParam("uid") String uid,
+//						HttpSession session)
+//	{
+//		// HttpSessionListener에서 @Autowired가 작동하지 않으므로 세션에 Service참조를
+//		// 저장하여 리스너에서 참조할 수 있도록 준비한다
+//		session.setAttribute("service", svc);
+//		
+//		if(uid!=null && !uid.equals("")) {
+//			session.setAttribute("uid", uid);
+//			return "로그인 성공";
+//		}
+//		
+//		return "로그인 실패";
+//	}
 	
 	
 	@GetMapping("/info")
 	public String input(Model model) {
 		model.addAttribute("person",new Person());
-		return "thymeleaf/infoForm";
+		return "thymeleaf/person/infoForm";
 	}
 	
 	
@@ -92,14 +117,14 @@ public class PersonController {
 //				System.out.println(errMsg);
 //			}
 			
-			return "thymeleaf/infoForm";
+			return "thymeleaf/person/infoForm";
 		};
 		
 		try {
 			svc.save(person);
 		}catch(HttpClientErrorException e) {
 			model.addAttribute("msg", "로그인 후에 사용가능");
-			return "thymeleaf/login";
+			return "thymeleaf/person/login";
 		}
 		
 		
@@ -123,20 +148,20 @@ public class PersonController {
 	public String list(Model model) {
 		List<Person> list = svc.list();
 		model.addAttribute("list", list);
-		return "thymeleaf/personList";
+		return "thymeleaf/person/personList";
 	}
 	
 	@GetMapping("/detail/{num}")
 	public String detail(@PathVariable("num") int num, Model model) {
 		
 		model.addAttribute("p", svc.detail(num));
-		return "thymeleaf/personDetail";
+		return "thymeleaf/person/personDetail";
 	}
 	@GetMapping("/edit/{num}")
 	public String edit(@PathVariable("num") int num,Model model) {
 		
 		model.addAttribute("p", svc.detail(num));
-		return "thymeleaf/edit";
+		return "thymeleaf/person/edit";
 	}
 	
 	@PostMapping("/update")
@@ -152,6 +177,12 @@ public class PersonController {
 		
 		return svc.delete(num);
 	}
+	
+
+	
+
+
+	
 	
 
 }

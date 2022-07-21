@@ -25,7 +25,7 @@ public class Person {
 	private int num;//pk의 역할을 지정
 	
 	@NotEmpty(message="필수 입력입니다")
-	@Size(min=2, message="{Person.Name.Size}")
+	@Size(min=2, message="2자 이상 입력하세요")
 	//오류메세지를 직접 정의하지 않더라고 메세제 사용가능
 	//message properties에 설정가능
 	private String name;

@@ -1,10 +1,12 @@
 package com.ezen.demo.person;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.aspectj.lang.JoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,10 @@ import org.springframework.stereotype.Service;
 public class PersonService {
 	@Autowired
 	PersonResipatory dao;
+	
+	@Autowired
+	private UserResipatory reqRepository;
+	
 
 	public Map<String, Object> save(Person person) {
 		
@@ -55,5 +61,21 @@ public class PersonService {
 		
 		return map;
 	}
+
+
+	public void addlog() {
+		List<User> list = new ArrayList<>();
+
+		
+	}
+
+	public boolean saveAll(List<User> list)
+	{
+		
+		reqRepository.saveAll(list);
+		return true;
+	}
+
+
 
 }
