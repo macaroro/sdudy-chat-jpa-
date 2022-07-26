@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>메일 작성 폼</title>
+</head>
+<body>
+<h3> 메일 파일 첨부</h3>
+<form action="/mail/auth/abc123" method="post" enctype="multipart/form-data">
+<input type="hidden" name="empno" id="empno" th:value="${empno}">
+제목<input type="text" name="title" id="title">
+내용<input type="text" name="contents" id="contents">
+   File <input type="file" name="files" multiple="multiple"><br> 
+   <button type="submit">메일 보내기</button>
+</form>
+</body>
+</html>
